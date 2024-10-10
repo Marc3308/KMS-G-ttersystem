@@ -1,0 +1,8 @@
+name: KMS-Goettersystem
+version: '1.20.1'
+main: me.marc3308.kmsgoettersystem.KMS_Goettersystem
+api-version: '1.21'
+
+permissions:
+  gott:
+    description: sprich als einer der götter
