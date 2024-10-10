@@ -11,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static me.marc3308.kmsgoettersystem.goettersystem.Gotterliste;
-import static me.marc3308.kmsgoettersystem.goettersystem.getPlugin;
+import static me.marc3308.kmsgoettersystem.goettersystem.*;
 
 public class gottcomand implements CommandExecutor , TabCompleter {
     @Override
@@ -22,17 +21,17 @@ public class gottcomand implements CommandExecutor , TabCompleter {
             Player p=(Player) sender;
             if(!p.hasPermission("gott"))return false;
             for (gott g : Gotterliste){
-                if (g.getName().equals(args[1])){
+                if (g.getName().equals(args[0])){
                     ArmorStand ar=p.getWorld().spawn(p.getLocation().add(0,0,0),ArmorStand.class);
-                    String newname=g.getFarbe()+args[2];
-                    for(int i=3;i<args.length;i++)newname+=" "+args[i];
-                    ar.setMaxHealth(1000.0);
+                    String newname=g.getFarbe()+args[1];
+                    for(int i=2;i<args.length;i++)newname+=" "+args[i];
+                    ar.setInvulnerable(true);
                     ar.setCustomName(newname);
                     ar.setCustomNameVisible(true);
                     ar.setGravity(false);
                     ar.setVisible(false);
                     ar.setSmall(true);
-                    Bukkit.getScheduler().runTaskLater(getPlugin(), () -> ar.remove(),20*10);
+                    Bukkit.getScheduler().runTaskLater(getPlugin(), () -> ar.remove(),20*gotterconfig.getInt("Despawnzeit"));
 
                     return true;
                 }
