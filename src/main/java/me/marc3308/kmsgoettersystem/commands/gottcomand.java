@@ -2,7 +2,6 @@ package me.marc3308.kmsgoettersystem.commands;
 
 import me.marc3308.kmsgoettersystem.objekte.gott;
 import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.*;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
@@ -20,24 +19,24 @@ public class gottcomand implements CommandExecutor , TabCompleter {
         if(sender instanceof Player){
             Player p=(Player) sender;
             if(!p.hasPermission("gott"))return false;
-            for (gott g : Gotterliste){
-                if (g.getName().equals(args[0])){
-                    ArmorStand ar=p.getWorld().spawn(p.getLocation().add(0,0,0),ArmorStand.class);
-                    String newname=g.getFarbe()+args[1];
-                    for(int i=2;i<args.length;i++)newname+=" "+args[i];
-                    ar.setInvulnerable(true);
-                    ar.setCustomName(newname);
-                    ar.setCustomNameVisible(true);
-                    ar.setGravity(false);
-                    ar.setVisible(false);
-                    ar.setSmall(true);
-                    Bukkit.getScheduler().runTaskLater(getPlugin(), () -> ar.remove(),20*gotterconfig.getInt("Despawnzeit"));
+            if(args.length>1){
+                for (gott g : Gotterliste){
+                    if (g.getName().equals(args[0])){
+                        ArmorStand ar=p.getWorld().spawn(p.getLocation().add(0,0,0),ArmorStand.class);
+                        String newname=g.getFarbe()+args[1];
+                        for(int i=2;i<args.length;i++)newname+=" "+args[i];
+                        ar.setInvulnerable(true);
+                        ar.setCustomName(newname);
+                        ar.setCustomNameVisible(true);
+                        ar.setGravity(false);
+                        ar.setVisible(false);
+                        ar.setSmall(true);
+                        Bukkit.getScheduler().runTaskLater(getPlugin(), () -> ar.remove(),20*conmap.get(1).getInt("Despawnzeit"));
 
-                    return true;
+                        return true;
+                    }
                 }
             }
-
-
         }
 
         return false;
