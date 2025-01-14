@@ -1,6 +1,7 @@
 package me.marc3308.kmsgoettersystem;
 
 import me.marc3308.kmsgoettersystem.commands.gottcomand;
+import me.marc3308.kmsgoettersystem.commands.smitecommand;
 import me.marc3308.kmsgoettersystem.objekte.gott;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -9,13 +10,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+
+import static me.marc3308.kmsgoettersystem.utility.Gotterliste;
+import static me.marc3308.kmsgoettersystem.utility.conmap;
 
 public final class goettersystem extends JavaPlugin {
-
-    public static ArrayList<gott> Gotterliste = new ArrayList<>();
-    public static HashMap<Integer,FileConfiguration> conmap=new HashMap<>();
 
 
     public static goettersystem plugin;
@@ -36,10 +35,10 @@ public final class goettersystem extends JavaPlugin {
 
         File file1 = new File("plugins/KMS Plugins/Göttersystem","Götter.yml");
         FileConfiguration con1= YamlConfiguration.loadConfiguration(file1);
-        conmap.put(1,con1);
 
 
         if(con1.get("Götterliste")==null){
+            con1.set("smitedamage",3);
             con1.set("Despawnzeit",10);
             con1.set("Götterliste"+".1"+".Name","Blutgott");
             con1.set("Götterliste"+".1"+".Farbe","§4");
@@ -59,6 +58,7 @@ public final class goettersystem extends JavaPlugin {
         }
 
         getCommand("gott").setExecutor(new gottcomand());
+        getCommand("smite").setExecutor(new smitecommand());
 
 
 

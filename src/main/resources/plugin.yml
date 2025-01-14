@@ -1,6 +1,7 @@
 name: KMS-Goettersystem
 version: '${project.version}'
 main: me.marc3308.kmsgoettersystem.goettersystem
+depend: [zerotrust]
 api-version: '1.21'
 
 permissions:
@@ -9,3 +10,5 @@ permissions:
 commands:
   gott:
     description: Sprich als ein gott
+  smite:
+    description: smite a player

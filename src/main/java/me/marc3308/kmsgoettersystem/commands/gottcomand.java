@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static me.marc3308.kmsgoettersystem.goettersystem.*;
+import static me.marc3308.kmsgoettersystem.utility.Gotterliste;
+import static me.marc3308.kmsgoettersystem.utility.conmap;
 
 public class gottcomand implements CommandExecutor , TabCompleter {
     @Override
